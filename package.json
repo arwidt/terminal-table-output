@@ -1,37 +1,44 @@
 {
-  "name": "timereport",
+  "name": "terminal-table-output",
   "version": "1.0.0",
-  "description": "",
+  "description": "Build and output tables in the terminal or console as a string.",
+  "keywords": [
+    "console",
+    "log",
+    "table",
+    "terminal",
+    "print",
+    "output"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:arwidt/terminal-table-output.git"
+  },
+  "files": [
+    "index.js",
+    "taskmodules/"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arwidt/timereport.git"
-  },
-  "keywords": [
-    "logger",
-    "timereport",
-    "timeout",
-    "milliseconds",
-    "log",
-    "logs",
-    "time",
-    "tasks"
-  ],
-  "author": "Arwid Thornstrom <arwidt@gmail.com> (http://thingsarerandom.com/)",
-  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/arwidt/timereport/issues"
+    "url": "https://github.com/arwidt/terminal-table-output/issues",
+    "email": "arwidt@gmail.com"
   },
-  "homepage": "https://github.com/arwidt/timereport#readme",
+  "author": "Arwid Thornström (arwidt@gmail.com)",
+  "license": "ISC",
+  "maintainers": [
+    {
+      "email": "arwidt@gmail.com",
+      "name": "arwidt"
+    }
+  ],
   "devDependencies": {
     "lodash": "^4.5.0",
     "mocha": "^2.4.4",
     "should": "^8.2.2"
   },
   "dependencies": {
-    "colors": "^1.1.2"
   }
 }
