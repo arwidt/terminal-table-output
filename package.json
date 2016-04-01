@@ -1,6 +1,6 @@
 {
   "name": "terminal-table-output",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Build and output tables in the terminal or console as a string.",
   "keywords": [
     "console",
@@ -39,6 +39,5 @@
     "mocha": "^2.4.4",
     "should": "^8.2.2"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
