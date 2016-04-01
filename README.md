@@ -17,17 +17,24 @@ Use this syntax
 		.row()
 		.col('onoff')
 		.col('extraextra')
+		.line()
+		.col('table')
+		.col('delux')
 		.print(true);
 or this
 
 	tto.pushrow(['foo', 'bar', 'foobar'])
 		.pushrow(['onoff', 'extraextra'])
+		.line()
+		.pushrow(['table', 'delux'])
 		.print(true);
 		
 both will output
 	
 	foo   | bar        | foobar
 	onoff | extraextra |
+	===========================
+	table | delux      |
 	
 ## Settings
 
@@ -38,12 +45,19 @@ And you can set the delimiter between columns.
 	var tto = require('terminal-table-output')
 				.create({
 					fill: "-",
-					border: "/"
+					border: "/",
+					line: ">"
 				});
 				
 Would output the example above in the following way.
 
 	foo--/bar-------/foobar
 	onoff/extraextra/
+	>>>>>>>>>>>>>>>>>>>>>>>
+	table/delay-----/
 	
-The defaults are fill `" "` and border `" | "`
+Default settings  
+**fill:** " "  
+**border:** " | "  
+**line:** "="  
+

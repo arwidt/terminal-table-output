@@ -38,6 +38,11 @@ describe('terminal-table-output.js', function() {
 
         var _tto = tto.create();
 
+        it('if running col as the first call, it should create the first row array', function() {
+            _tto.col("FIRST");
+            (_.first(_tto.output)[0]).should.equal('FIRST');
+        });
+
         it('pushrow should a a full row', function() {
 
             var _i = _.times(5, function(val) {
@@ -45,7 +50,7 @@ describe('terminal-table-output.js', function() {
             });
             _tto.pushrow(_i);
 
-            (_tto.output[0]).should.equal(_i);
+            (_.last(_tto.output)).should.equal(_i);
 
             var _j = _.times(5, function(val) {
                 return getRandomStuff();
@@ -53,13 +58,13 @@ describe('terminal-table-output.js', function() {
 
             _tto.pushrow(_j);
 
-            (_tto.output[1]).should.equal(_j);
+            (_.last(_tto.output)).should.equal(_j);
 
         });
 
         it('col should add a column to last row', function() {
             _tto.col("test");
-            var tto_o = _tto.output[1];
+            var tto_o = _.last(_tto.output);
             (_.last(tto_o)).should.equal("test");
         });
 
@@ -68,6 +73,12 @@ describe('terminal-table-output.js', function() {
                 .col("foobar");
 
             (_.last(_tto.output)[0]).should.be.exactly("foobar");
+        });
+
+        it('line should add the string line instead of a array', function() {
+            _tto.line();
+
+            (_.last(_tto.output)).should.be.exactly('line');
         });
 
         it('reset should clear the data', function() {
@@ -81,6 +92,8 @@ describe('terminal-table-output.js', function() {
     describe('Same width columns for printing', function() {
 
         var _tto = tto.create();
+        _tto.col("TESTDATA")
+            .line();
 
         _.times(15, function(val) {
              _tto.pushrow(_.times(_.random(1, 6), function() {
@@ -89,7 +102,7 @@ describe('terminal-table-output.js', function() {
         });
 
         it('verify that test data is correct', function() {
-            (_tto.output.length).should.be.exactly(15);
+            (_tto.output.length).should.be.exactly(17);
             (_.first(_tto.output).length).should.be.within(1, 6);
         });
 
