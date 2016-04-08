@@ -77,8 +77,12 @@ describe('terminal-table-output.js', function() {
 
         it('line should add the string line instead of a array', function() {
             _tto.line();
+            (_.last(_tto.output)).should.be.exactly('{{line}}');
+        });
 
-            (_.last(_tto.output)).should.be.exactly('line');
+        it('line should take a string, this string will be used as that current line gfx', function() {
+            _tto.line("<->");
+            (_.last(_tto.output)).should.be.exactly('{{line}}<->');
         });
 
         it('reset should clear the data', function() {
@@ -93,7 +97,9 @@ describe('terminal-table-output.js', function() {
 
         var _tto = tto.create();
         _tto.col("TESTDATA")
-            .line();
+            .line()
+            .line("<line>")
+            .line("/");
 
         _.times(15, function(val) {
              _tto.pushrow(_.times(_.random(1, 6), function() {
@@ -102,7 +108,7 @@ describe('terminal-table-output.js', function() {
         });
 
         it('verify that test data is correct', function() {
-            (_tto.output.length).should.be.exactly(17);
+            (_tto.output.length).should.be.exactly(19);
             (_.first(_tto.output).length).should.be.within(1, 6);
         });
 

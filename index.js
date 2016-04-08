@@ -1,18 +1,39 @@
 var _output = (function() {
 
-    var _fillString = function(str, len, char) {
-        while (str.length < len) {
-            str += char;
-        }
-        return str;
-    };
+    var _opts,
+        _lineDelimiter = "{{line}}",
+        
+        _fillString = function(str, len, char) {
+                while (str.length < len) {
+                str += char;
+            }
+            return str;
+        },
+
+        _isLine = function(str) {
+            if (typeof str === "string") {
+                return (str.substr(0, 8) === _lineDelimiter);
+            }
+            return false;
+        },
+
+         _getLineChar = function(str) {
+            if (str.substr(0, 8) === _lineDelimiter) {
+                if (str.length > 8) {
+                    return str.substr(8, str.length);
+                } else {
+                    return _opts.line;
+               }
+            }
+            return false;
+        };
 
     var _inst = function(opts) {
-        var _opts = opts || {
-                fill: " ",
-                border: " | ",
-                line: "="
-            };
+        _opts = opts || {
+            fill: " ",
+            border: " | ",
+            line: "="
+        };
         return {
             output: [],
             output_print: null,
@@ -40,8 +61,8 @@ var _output = (function() {
                 return this;
             },
 
-            line: function() {
-                this.output.push("line");
+            line: function(linegfx) {
+                this.output.push(_lineDelimiter + (linegfx ? linegfx : ""));
                 return this;
             },
 
@@ -54,7 +75,7 @@ var _output = (function() {
                 // And check longest item in each column
                 var col_length = [];
                 for(i = 0, len = o.length; i < len; i++) {
-                    if (o[i] !== "line") {
+                    if (!_isLine(o[i])) {
                         for (j = 0, jlen = o[i].length; j < jlen; j++) {
                             o[i][j] += "";
 
@@ -71,14 +92,16 @@ var _output = (function() {
                     total_width += val + _opts.border.length;
                 });
 
-                var str = "";
+                var str = "",
+                    lchar;
                 for(i = 0, len = o.length; i < len; i++) {
-                    if (o[i] !== "line") {
+                    if (!_isLine(o[i])) {
                         for (j = 0, jlen = o[i].length; j < jlen; j++) {
                             str += _fillString(o[i][j], col_length[j], _opts.fill) + _opts.border;
                         }
                     } else {
-                        str += Array(~~(total_width/_opts.line.length)).join(_opts.line);
+                        lchar = _getLineChar(o[i]); 
+                        str += Array(Math.round(total_width/lchar.length)).join(lchar);
                     }
                     str += "\n"
                 }

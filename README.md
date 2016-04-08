@@ -2,6 +2,8 @@
 
 Create and print tables in the terminal.
 
+[![NPM](https://nodei.co/npm/terminal-table-output.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/terminal-table-output/)
+
 ## Installation
 
 	npm install terminal-table-output
@@ -18,15 +20,17 @@ Use this syntax
 		.col('onoff')
 		.col('extraextra')
 		.line()
-		.col('table')
-		.col('delux')
+		.col('line')
+		.col('special')
+		.line('(*)')
 		.print(true);
 or this
 
 	tto.pushrow(['foo', 'bar', 'foobar'])
 		.pushrow(['onoff', 'extraextra'])
 		.line()
-		.pushrow(['table', 'delux'])
+		.pushrow(['line', 'special'])
+		.line("(*)")
 		.print(true);
 		
 both will output
@@ -34,7 +38,27 @@ both will output
 	foo   | bar        | foobar
 	onoff | extraextra |
 	===========================
-	table | delux      |
+	line  | special    |
+	(*)(*)(*)(*)(*)(*)(*)(*)(*)
+	
+### Functions	
+	
+#### col(anyString)
+
+col takes any string and pushes this into the last row.
+
+#### row()
+
+row creates a new row, using col after this will push into the new row
+
+#### pushrow(arrayOfStrings)
+
+creates a new row from the array of strings inserted into the function
+
+#### line(anyString)
+
+create a horizontal line in the table output, line takes a string argument as the char of string used in that specific line.
+
 	
 ## Settings
 
