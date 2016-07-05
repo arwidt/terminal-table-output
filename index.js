@@ -57,6 +57,9 @@ var _output = (function() {
                 if (this.output.length === 0) {
                     this.output.push([]);
                 }
+                if (typeof this.output[this.output.length-1] === "string") {
+                    this.output.push([]);
+                }
                 this.output[this.output.length-1].push(s);
                 return this;
             },

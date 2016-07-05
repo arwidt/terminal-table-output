@@ -38,12 +38,23 @@ describe('terminal-table-output.js', function() {
 
         var _tto = tto.create();
 
+        it('after line it should be possible to use col directly', function() {
+            var _tt = tto.create();
+            _tt.col('foo')
+                .col('bar')
+                .line();
+
+            _tt.col('bar')
+                .col('foo')
+                .row();
+        });
+
         it('if running col as the first call, it should create the first row array', function() {
             _tto.col("FIRST");
             (_.first(_tto.output)[0]).should.equal('FIRST');
         });
 
-        it('pushrow should a a full row', function() {
+        it('pushrow should add a full row', function() {
 
             var _i = _.times(5, function(val) {
                 return getRandomStuff();
