@@ -14,7 +14,7 @@ Use this syntax
 ```javascript
 var tto = require('terminal-table-output').create();
 tto.col('foo')
-	.col('bar)
+	.col('bar')
 	.col('foobar')
 	.row()
 	.col('onoff')
