@@ -11,36 +11,38 @@ Create and print tables in the terminal.
 ## Usage
 
 Use this syntax
-
-	var tto = require('terminal-table-output').create();
-	tto.col('foo')
-		.col('bar)
-		.col('foobar')
-		.row()
-		.col('onoff')
-		.col('extraextra')
-		.line()
-		.col('line')
-		.col('special')
-		.line('(*)')
-		.print(true);
+```javascript
+var tto = require('terminal-table-output').create();
+tto.col('foo')
+	.col('bar')
+	.col('foobar')
+	.row()
+	.col('onoff')
+	.col('extraextra')
+	.line()
+	.col('line')
+	.col('special')
+	.line('(*)')
+	.print(true);
+```
 or this
-
-	tto.pushrow(['foo', 'bar', 'foobar'])
-		.pushrow(['onoff', 'extraextra'])
-		.line()
-		.pushrow(['line', 'special'])
-		.line("(*)")
-		.print(true);
-		
+```javascript
+tto.pushrow(['foo', 'bar', 'foobar'])
+	.pushrow(['onoff', 'extraextra'])
+	.line()
+	.pushrow(['line', 'special'])
+	.line("(*)")
+	.print(true);
+```		
 both will output
-	
-	foo   | bar        | foobar
-	onoff | extraextra |
-	===========================
-	line  | special    |
-	(*)(*)(*)(*)(*)(*)(*)(*)(*)
-	
+```	
+foo   | bar        | foobar
+onoff | extraextra |
+===========================
+line  | special    |
+(*)(*)(*)(*)(*)(*)(*)(*)(*)
+```
+
 ### Functions	
 	
 #### col(anyString)
@@ -66,19 +68,21 @@ You can send in a settings object with the create function.
 With these you can set the character that fills the text that has less width than the longest.
 And you can set the delimiter between columns.
 
-	var tto = require('terminal-table-output')
-				.create({
-					fill: "-",
-					border: "/",
-					line: ">"
-				});
-				
+```javascript
+var tto = require('terminal-table-output')
+			.create({
+				fill: "-",
+				border: "/",
+				line: ">"
+			});
+```				
 Would output the example above in the following way.
-
-	foo--/bar-------/foobar
-	onoff/extraextra/
-	>>>>>>>>>>>>>>>>>>>>>>>
-	table/delay-----/
+```
+foo--/bar-------/foobar
+onoff/extraextra/
+>>>>>>>>>>>>>>>>>>>>>>>
+table/delay-----/
+```
 	
 Default settings  
 **fill:** " "  
