@@ -81,7 +81,6 @@ var _output = (function() {
                     if (!_isLine(o[i])) {
                         for (j = 0, jlen = o[i].length; j < jlen; j++) {
                             o[i][j] += "";
-
                             if (!col_length[j]) col_length[j] = 0;
                             if (col_length[j] < o[i][j].length) {
                                 col_length[j] = o[i][j].length;
@@ -113,6 +112,12 @@ var _output = (function() {
                 } else {
                     return str;
                 }
+            },
+
+            export: function() {
+
+
+
             }
         };
     };

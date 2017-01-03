@@ -133,12 +133,38 @@ describe('terminal-table-output.js', function() {
             });
         });
 
+        it("lines should be the length of the table", function() {
+            var o = tto.create();
+            o.col('foo')
+                .col("")
+                .col('123456789')
+                .line();
+
+            o.col(123)
+                .col('123')
+                .col("12345");
+
+            o.print(true);
+
+        });
+
         it('should output a nice table', function() {
             _tto.print(true);
         });
 
         it('should return a string', function() {
             _tto.print().should.be.a.String();
+        });
+
+        describe('output data', function() {
+
+            it('should return a output data type, that can be printed', function() {
+
+                var data = _tto.export();
+                console.log(data);
+
+            });
+
         });
 
     });
