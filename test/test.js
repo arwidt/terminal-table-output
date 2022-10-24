@@ -3,14 +3,19 @@
 var tto = require('../index.js');
 var should = require('should');
 var _ = require('lodash');
+var chalk = require('chalk');
 
 var getRandomStuff = function() {
     var abc = "abcdefghijklmnopqrstuvwxyz";
     var num = "1234567890";
-    if (Math.round(Math.random()) === 1) {
-        return abc.substr(0, _.random(abc.length-1));
-    } else {
-        return parseInt(num.substr(0, _.random(num.length-1)));
+    const rnd = Math.floor(Math.random()*3);
+    switch (rnd) {
+        case 0:
+            return parseInt(num.substr(0, _.random(num.length-1)));
+        case 1:
+            return chalk.red('chalk:' + abc.substr(0, _.random(abc.length-1)));
+        case 2:
+            return abc.substr(0, _.random(abc.length-1));
     }
 }
 
@@ -112,14 +117,22 @@ describe('terminal-table-output.js', function() {
             .line("<line>")
             .line("/");
 
-        _.times(15, function(val) {
+        _.times(5, function(val) {
              _tto.pushrow(_.times(_.random(1, 6), function() {
                  return getRandomStuff();
              }));
         });
 
+        _tto.line("-");
+
+        _.times(10, function(val) {
+            _tto.pushrow(_.times(_.random(1, 6), function() {
+                return getRandomStuff();
+            }));
+       });
+
         it('verify that test data is correct', function() {
-            (_tto.output.length).should.be.exactly(19);
+            (_tto.output.length).should.be.exactly(20);
             (_.first(_tto.output).length).should.be.within(1, 6);
         });
 
